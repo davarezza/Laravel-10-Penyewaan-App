@@ -16,7 +16,7 @@ class RoleUsersSeeder extends Seeder
         $userData = [
             [
                 'name' => 'Dava Rezza',
-                'email' => 'dava20@gmail.com',
+                'email' => 'admin@gmail.com',
                 'role' => 'admin',
                 'password' => bcrypt('123'),
             ],

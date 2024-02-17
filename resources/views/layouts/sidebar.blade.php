@@ -16,10 +16,10 @@
             </li>
         @endif
         <li class="nav-item">
-            <a class="nav-link active text-dark" href="#"><i class='bx bx-line-chart'></i> Grafik Kendaraan</a>
+            <a class="nav-link active text-dark" href="{{ route('admin.grafik') }}"><i class='bx bx-line-chart'></i> Grafik Kendaraan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active text-dark" href="#"><i class='bx bxs-report'></i> Laporan</a>
+            <a class="nav-link active text-dark" href="{{ route('admin.aktivitas') }}"><i class='bx bxs-report'></i> Aktivitas</a>
         </li><hr>
         <li class="nav-item">
             <form action="/logout" method="post">

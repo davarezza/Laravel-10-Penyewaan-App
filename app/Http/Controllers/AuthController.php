@@ -31,8 +31,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($login)) {
             if (Auth::user()->role == 'approver') {
+                activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' melakukan login');
                 return redirect('/home')->with('success', 'Login berhasil sebagai approver');
             } elseif (Auth::user()->role == 'admin') {
+                activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' melakukan login');
                 return redirect('/home')->with('success', 'Login berhasil sebagai admin');
             }
         }
@@ -42,6 +44,12 @@ class AuthController extends Controller
 
     public function logout()
     {
+        if (Auth::check()) {
+            activity()
+                ->causedBy(Auth::user())
+                ->log('User ' . Auth::user()->name . ' melakukan logout');
+        }
+
         Auth::logout();
 
         request()->session()->invalidate();

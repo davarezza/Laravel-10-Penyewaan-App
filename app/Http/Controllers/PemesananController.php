@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kendaraan;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemesananController extends Controller
 {
@@ -47,6 +48,10 @@ class PemesananController extends Controller
             'status' => $request->status,
         ]);
 
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Menambahkan pemesanan baru: ' . $data->id);
+
         return redirect()->route('pemesanan.index')->with('success', 'Add Data Successfully');
     }
 
@@ -88,6 +93,10 @@ class PemesananController extends Controller
         $pemesanan->status = $request->status;
         $pemesanan->save();
 
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Memperbarui pemesanan: ' . $pemesanan->id);
+
         return redirect()->route('pemesanan.index')->with('success', 'Data berhasil diperbarui!');
     }
 
@@ -98,6 +107,10 @@ class PemesananController extends Controller
     {
         $pemesanan->delete();
 
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Menghapus pemesanan: ' . $pemesanan->id);
+
         return redirect()->route('pemesanan.index')->with('success', 'Data berhasil dihapus!');
     }
 
@@ -106,6 +119,10 @@ class PemesananController extends Controller
         $pemesanan = Pemesanan::findOrFail($id);
         $pemesanan->status = $request->status;
         $pemesanan->save();
+
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Mengubah status pemesanan: ' . $pemesanan->id . ' menjadi ' . $request->status);
 
         return redirect()->route('pemesanan.index')->with('success', 'Status pemesanan berhasil diperbarui');
     }

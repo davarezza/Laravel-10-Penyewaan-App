@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KendaraanController extends Controller
 {
@@ -42,6 +43,10 @@ class KendaraanController extends Controller
             'tahun_pembuatan' => $request->tahun_pembuatan,
             'status' => $request->status,
         ]);
+
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Menambahkan kendaraan baru: ' . $data->jenis);
 
         return redirect()->route('kendaraan.index')->with('success', 'Add Data Successfully');
     }
@@ -83,6 +88,10 @@ class KendaraanController extends Controller
         $kendaraan->status = $request->status;
         $kendaraan->save();
 
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Memperbarui kendaraan: ' . $kendaraan->jenis);
+
         return redirect()->route('kendaraan.index')->with('success', 'Data berhasil diperbarui!');
     }
 
@@ -92,6 +101,10 @@ class KendaraanController extends Controller
     public function destroy(Kendaraan $kendaraan)
     {
         $kendaraan->delete();
+
+        activity()
+            ->causedBy(Auth::user())
+            ->log('Menghapus kendaraan: ' . $kendaraan->jenis);
 
         return redirect()->route('kendaraan.index')->with('success', 'Data berhasil dihapus!');
     }

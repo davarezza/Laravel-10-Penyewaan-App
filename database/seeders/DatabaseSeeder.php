@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Kendaraan;
+use App\Models\Pemesanan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,20 +22,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Kendaraan::create([
-            'jenis' => 'Large Dozer',
-            'tahun_pembuatan' => '2021',
-            'status' => 1,
-        ]);
-        Kendaraan::create([
-            'jenis' => 'Dump Truck',
-            'tahun_pembuatan' => '2022',
-            'status' => 1,
-        ]);
-        Kendaraan::create([
-            'jenis' => 'Scraper',
-            'tahun_pembuatan' => '2020',
-            'status' => 1,
-        ]);
+        Kendaraan::factory(3)->create();
+
+        Pemesanan::factory()->count(9)->create();
     }
 }

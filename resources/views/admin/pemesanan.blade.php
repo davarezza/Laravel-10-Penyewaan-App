@@ -17,11 +17,8 @@
     <div class="justify-content-space-between">
         @if (auth()->user()->role === 'admin')
         <a href="{{ route('pemesanan.create') }}" class="btn btn-info btn-tambah mb-2">Tambah Data</a>
-        <a href="#" class="btn btn-primary btn-tambah mb-2">Laporan Pemesanan</a>
         @endif
-        @if (auth()->user()->role === 'approver')
-        <a href="#" class="btn btn-primary btn-tambah mb-2 mx-2">Laporan Pemesanan</a>
-        @endif
+        <a href="{{ route('export') }}" class="btn btn-primary btn-tambah mb-2 mx-2">Export Excel</a>
     </div>
     <table class="table table-bg-dark">
         <thead>

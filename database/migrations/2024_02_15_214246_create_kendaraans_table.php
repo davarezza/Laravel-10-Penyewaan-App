@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kendaraans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('jenis')->unique();
             $table->integer('tahun_pembuatan');
             $table->integer('status')->default(1);
             $table->timestamps();
