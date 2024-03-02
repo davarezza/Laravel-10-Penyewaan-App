@@ -51,9 +51,7 @@
                             <form action="{{ route('pemesanan.approve', $data->id) }}" method="post">
                                 @csrf
                                 @method('patch')
-                                {{-- Tombol Setujui --}}
                                 <button type="submit" name="status" value="2" class="btn btn-success">Setujui</button>
-                                {{-- Tombol Tolak --}}
                                 <button type="submit" name="status" value="0" class="btn btn-danger">Tolak</button>
                             </form>
                         {{-- Tombol Edit dan Delete hanya untuk Admin --}}

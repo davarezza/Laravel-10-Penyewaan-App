@@ -16,14 +16,6 @@ class AdminController extends Controller
         return view('admin.home');
     }
 
-    public function kendaraan()
-    {
-        $kendaraan = Kendaraan::all();
-        return view('admin.kendaraan', [
-            'kendaraan' => $kendaraan,
-        ]);
-    }
-
     public function pemesanan()
     {
         $pemesanan = Pemesanan::all();
@@ -56,7 +48,6 @@ class AdminController extends Controller
 
     public function grafik()
     {
-        // Mendapatkan data jumlah kendaraan berdasarkan jenisnya dari pemesanan yang statusnya disetujui
         $dataKendaraan = Pemesanan::where('pemesanans.status', 2) // Status disetujui
             ->join('kendaraans', 'pemesanans.kendaraan_id', '=', 'kendaraans.id')
             ->select('kendaraans.jenis')
@@ -64,7 +55,6 @@ class AdminController extends Controller
             ->groupBy('kendaraans.jenis')
             ->get();
 
-        // Menyiapkan data untuk grafik
         $jenis = [];
         $jumlah = [];
 
@@ -73,7 +63,6 @@ class AdminController extends Controller
             $jumlah[] = $kendaraan->jumlah;
         }
 
-        // Mengirim data ke tampilan blade
         return view('admin.grafik', [
             'dataGrafik' => json_encode([
                 'jenis' => $jenis,

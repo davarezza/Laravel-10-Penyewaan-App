@@ -29,7 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
     Route::get('/pemesanan', [PemesananController::class, 'index'])->name('pemesanan.index');
     Route::get('/export', [AdminController::class, 'export'])->name('export');
-    Route::get('/kendaraan', [AdminController::class, 'kendaraan'])->name('admin.kendaraan');
     Route::get('/aktivitas', [AdminController::class, 'aktivitas'])->name('admin.aktivitas');
     Route::delete('/aktivitas/delete', [AdminController::class, 'deleteAll'])->name('aktivitas.delete');
     Route::get('/grafik', [AdminController::class, 'grafik'])->name('admin.grafik');
